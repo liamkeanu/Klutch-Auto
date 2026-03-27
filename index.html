@@ -268,6 +268,8 @@
       flex-wrap: wrap;
       row-gap: 16px;
     }
+    .trust-marquee-track { display: contents; }
+    .trust-logo-dupe { display: none; }
     .trust-logo-img {
       height: 32px;
       width: auto;
@@ -1588,7 +1590,29 @@
       .btn-secondary-lg { font-size: 15px; padding: 13px 20px; }
       .hero-sub-stack { margin: 18px auto 32px; }
       .hero-trust { margin-top: 44px; }
-      .hero-trust-logos { gap: 18px; }
+      /* Car logo marquee */
+      .hero-trust-logos {
+        overflow: hidden;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 0;
+        mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+      }
+      .trust-marquee-track {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        flex-shrink: 0;
+        min-width: max-content;
+        animation: trust-marquee 22s linear infinite;
+        padding-right: 28px;
+      }
+      .trust-logo-dupe { display: flex; }
+      @keyframes trust-marquee {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-100%); }
+      }
 
       /* Section sizing */
       .section-title { font-size: clamp(24px, 7vw, 36px); letter-spacing: -0.025em; }
@@ -2128,17 +2152,33 @@
     <div class="hero-trust hero-anim hero-d4" style="position:relative;z-index:1;">
       <p class="hero-trust-label">Used by reps at dealerships across the US</p>
       <div class="hero-trust-logos">
-        <img class="trust-logo-img" src="CAR LOGOS PNG/ford-seeklogo.png" alt="Ford">
-        <img class="trust-logo-img" src="CAR LOGOS PNG/toyota-seeklogo.png" alt="Toyota">
-        <img class="trust-logo-img" src="CAR LOGOS PNG/chevrolet-seeklogo.png" alt="Chevrolet">
-        <img class="trust-logo-img" src="CAR LOGOS PNG/honda-silver-seeklogo.png" alt="Honda">
-        <img class="trust-logo-img" src="CAR LOGOS PNG/kia-seeklogo.png" alt="Kia">
-        <img class="trust-logo-img" src="CAR LOGOS PNG/hyundai-seeklogo.png" alt="Hyundai">
-        <img class="trust-logo-img" src="CAR LOGOS PNG/bmw-seeklogo.png" alt="BMW">
-        <img class="trust-logo-img" src="CAR LOGOS PNG/mercedes-benz-seeklogo.png" alt="Mercedes-Benz">
-        <img class="trust-logo-img" src="CAR LOGOS PNG/audi-seeklogo.png" alt="Audi">
-        <img class="trust-logo-img" src="CAR LOGOS PNG/jeep-seeklogo.png" alt="Jeep">
-        <img class="trust-logo-img" src="CAR LOGOS PNG/dodge-ram-seeklogo.png" alt="RAM">
+        <div class="trust-marquee-track" aria-hidden="false">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/ford-seeklogo.png" alt="Ford">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/toyota-seeklogo.png" alt="Toyota">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/chevrolet-seeklogo.png" alt="Chevrolet">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/honda-silver-seeklogo.png" alt="Honda">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/kia-seeklogo.png" alt="Kia">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/hyundai-seeklogo.png" alt="Hyundai">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/bmw-seeklogo.png" alt="BMW">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/mercedes-benz-seeklogo.png" alt="Mercedes-Benz">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/audi-seeklogo.png" alt="Audi">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/jeep-seeklogo.png" alt="Jeep">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/dodge-ram-seeklogo.png" alt="RAM">
+        </div>
+        <!-- Duplicate for seamless marquee loop (mobile only) -->
+        <div class="trust-marquee-track trust-logo-dupe" aria-hidden="true">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/ford-seeklogo.png" alt="">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/toyota-seeklogo.png" alt="">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/chevrolet-seeklogo.png" alt="">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/honda-silver-seeklogo.png" alt="">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/kia-seeklogo.png" alt="">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/hyundai-seeklogo.png" alt="">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/bmw-seeklogo.png" alt="">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/mercedes-benz-seeklogo.png" alt="">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/audi-seeklogo.png" alt="">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/jeep-seeklogo.png" alt="">
+          <img class="trust-logo-img" src="CAR LOGOS PNG/dodge-ram-seeklogo.png" alt="">
+        </div>
       </div>
     </div>
   </section>
