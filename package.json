@@ -1,0 +1,11 @@
+{
+  "name": "klutch-auto",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "dotenv": "^16.4.0",
+    "resend": "^3.5.0",
+    "stripe": "^16.0.0"
+  }
+}

@@ -1,6 +1,7 @@
 temporary screenshots/
 node_modules/
 *.log
+.env
 
 # Working/dev files
 CLAUDE.md
