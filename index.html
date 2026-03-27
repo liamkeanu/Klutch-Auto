@@ -1550,7 +1550,9 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
       .ext-vtabs-grid { grid-template-columns: 1fr; gap: 40px; }
-      .ext-vtabs-right { display: block; min-height: 360px; }
+      .ext-vtabs-right { display: block; min-height: 280px; }
+      .ext-vtabs-panel { padding: 12px; }
+      .ext-mock-ui { max-width: 100%; transform: scale(0.78); transform-origin: center center; }
       .testimonials-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
       .pricing-grid { display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 16px; max-width: 100%; padding-bottom: 16px; scrollbar-width: none; }
       .pricing-grid::-webkit-scrollbar { display: none; }
@@ -1592,8 +1594,9 @@
 
       /* Extensions vtabs */
       .ext-vtabs-grid { grid-template-columns: 1fr; gap: 32px; }
-      .ext-vtabs-right { display: block; min-height: 280px; }
-      .ext-mock-ui { max-width: 100%; transform: scale(0.82); transform-origin: center center; }
+      .ext-vtabs-right { display: block; min-height: 260px; }
+      .ext-vtabs-panel { padding: 12px; }
+      .ext-mock-ui { max-width: 100%; transform: scale(0.78); transform-origin: center center; }
 
       /* Testimonials */
       .testimonials-section { padding: 60px 16px 72px; }
