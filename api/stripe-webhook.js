@@ -4,11 +4,10 @@ const { Resend } = require('resend');
 
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw62-kqwoBK2LQYx8xQUiA-3vV_vgiMiJBRDcP-_TMbwJzwKAFoIx1fnFuJ8GaxrXrScw/exec';
 
-async function logToSheet(name, email, stripeCustomerId, subscriptionId, expiresAt) {
+async function logToSheet(name, email) {
   try {
     await fetch(SHEETS_URL, {
       method: 'POST',
-      mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name,
