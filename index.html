@@ -3676,6 +3676,48 @@
         m2.x=e.clientX-rect.left-W2/2; m2.y=e.clientY-rect.top-H2/2;
       });
     })();
+
+  // ===== FORM → GOOGLE SHEETS =====
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbziBmyOsKkma1FP9vun8vgXs81CcTqH3Hd8EThI4R7UNbpcg_4hW5HobRlVWnjpoMhUDw/exec';
+
+  function collectFormData(form) {
+    const f = form.elements;
+    return {
+      name:       f.name?.value        || '',
+      email:      f.email?.value       || '',
+      dealership: f.dealership?.value  || '',
+      phone:      f.phone?.value       || '',
+      role:       f.role?.value        || '',
+      volume:     f.volume?.value      || '',
+      method:     f.method?.value      || '',
+      referral:   f.referral?.value    || ''
+    };
+  }
+
+  function submitToSheets(form, btn) {
+    const data = collectFormData(form);
+    const originalText = btn.innerHTML;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    fetch(SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(() => { btn.textContent = 'Sent!'; })
+    .catch(() => { btn.innerHTML = originalText; btn.disabled = false; });
+  }
+
+  document.getElementById('signupForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    submitToSheets(this, this.querySelector('[type="submit"]'));
+  });
+
+  document.getElementById('scheduleForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    submitToSheets(this, this.querySelector('[type="submit"]'));
+  });
   </script>
 
 </body>
