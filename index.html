@@ -1552,7 +1552,9 @@
       .ext-vtabs-grid { grid-template-columns: 1fr; gap: 40px; }
       .ext-vtabs-right { display: block; min-height: 360px; }
       .testimonials-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
-      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .pricing-grid { display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 16px; max-width: 100%; padding-bottom: 16px; scrollbar-width: none; }
+      .pricing-grid::-webkit-scrollbar { display: none; }
+      .pricing-card-wrap { flex: 0 0 80vw; max-width: 300px; scroll-snap-align: center; }
       .method-grid { grid-template-columns: 1fr; gap: 40px; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
       .mockup-content { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
@@ -1590,7 +1592,8 @@
 
       /* Extensions vtabs */
       .ext-vtabs-grid { grid-template-columns: 1fr; gap: 32px; }
-      .ext-vtabs-right { display: block; min-height: 320px; }
+      .ext-vtabs-right { display: block; min-height: 280px; }
+      .ext-mock-ui { max-width: 100%; transform: scale(0.82); transform-origin: center center; }
 
       /* Testimonials */
       .testimonials-section { padding: 60px 16px 72px; }
@@ -1598,7 +1601,9 @@
 
       /* Pricing */
       .pricing-section { padding: 60px 16px 80px; }
-      .pricing-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+      .pricing-grid { display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 16px; max-width: 100%; padding-bottom: 16px; scrollbar-width: none; }
+      .pricing-grid::-webkit-scrollbar { display: none; }
+      .pricing-card-wrap { flex: 0 0 80vw; max-width: 300px; scroll-snap-align: center; }
       .pricing-card-wrap.featured-lift { transform: none !important; }
       .pricing-card-wrap.featured-lift:hover { transform: scale(1.04) translateY(-6px) !important; }
 
