@@ -3080,26 +3080,34 @@
       btnAnnual.addEventListener('click',  () => activateMode(false));
 
       // ── 5. CARD ENTRANCE (staggered scroll reveal) ────────────
-      // Hide initially via inline style (graceful degradation)
-      cardWraps.forEach(w => {
-        w.style.opacity = '0';
-        w.style.transform = 'translateY(44px)';
-      });
-
-      const cardIO = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const wrap = entry.target;
-          const delay = parseInt(wrap.dataset.stagger || '0');
-          setTimeout(() => {
-            wrap.style.opacity = '';
-            wrap.style.transform = '';
-          }, delay);
-          cardIO.unobserve(wrap);
+      // Skip on mobile — cards are in a horizontal scroll container
+      // and the IntersectionObserver never fires for off-screen cards
+      if (window.innerWidth <= 900) {
+        cardWraps.forEach(w => {
+          w.style.opacity = '';
+          w.style.transform = '';
         });
-      }, { threshold: 0.12 });
+      } else {
+        cardWraps.forEach(w => {
+          w.style.opacity = '0';
+          w.style.transform = 'translateY(44px)';
+        });
 
-      cardWraps.forEach(w => cardIO.observe(w));
+        const cardIO = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const wrap = entry.target;
+            const delay = parseInt(wrap.dataset.stagger || '0');
+            setTimeout(() => {
+              wrap.style.opacity = '';
+              wrap.style.transform = '';
+            }, delay);
+            cardIO.unobserve(wrap);
+          });
+        }, { threshold: 0.12 });
+
+        cardWraps.forEach(w => cardIO.observe(w));
+      }
     })();
 
     // ===== DOT CARD COUNTER =====
