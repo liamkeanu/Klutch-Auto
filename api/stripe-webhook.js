@@ -2,6 +2,32 @@ const Stripe = require('stripe');
 const { createClient } = require('@supabase/supabase-js');
 const { Resend } = require('resend');
 
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw62-kqwoBK2LQYx8xQUiA-3vV_vgiMiJBRDcP-_TMbwJzwKAFoIx1fnFuJ8GaxrXrScw/exec';
+
+async function logToSheet(name, email, stripeCustomerId, subscriptionId, expiresAt) {
+  try {
+    await fetch(SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        email,
+        dealership: '',
+        phone: '',
+        role: '',
+        volume: '',
+        method: '',
+        referral: '',
+        time: '',
+        source: 'Paid Customer'
+      })
+    });
+  } catch (err) {
+    console.error('Sheet log error:', err);
+  }
+}
+
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -69,6 +95,7 @@ async function onCheckoutComplete(session) {
     .single();
 
   console.log(`✅ License created for ${email}: ${license.license_key}`);
+  await logToSheet(name, email, session.customer, session.subscription, expiresAt);
   await sendActivationEmail(name, email, license.license_key);
 }
 
