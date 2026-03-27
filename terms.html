@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — Klutch</title>
+  <style>
+    @font-face { font-family: 'SuisseIntl'; src: url('Fonts/Suisse Int\'l/SuisseIntl-Regular.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: 'SuisseIntl'; src: url('Fonts/Suisse Int\'l/SuisseIntl-Medium.otf') format('opentype'); font-weight: 500; }
+    @font-face { font-family: 'SuisseIntl'; src: url('Fonts/Suisse Int\'l/SuisseIntl-SemiBold.otf') format('opentype'); font-weight: 600; }
+    @font-face { font-family: 'SuisseIntl'; src: url('Fonts/Suisse Int\'l/SuisseIntl-Bold.otf') format('opentype'); font-weight: 700; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #101012; --bg-800: #18181c; --bg-700: #1f1f24; --bg-600: #26262d;
+      --border: rgba(255,255,255,0.08);
+      --green: #1ee777; --green-text: #2a3010;
+      --violet: #7B6BF5;
+      --white: #f2f2f4; --white-dim: rgba(242,242,244,0.6); --white-faint: rgba(242,242,244,0.3);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'SuisseIntl', sans-serif; background: var(--bg); color: var(--white); line-height: 1.6; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(16,16,18,0.88); backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 24px; height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 70px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { color: var(--white-dim); text-decoration: none; font-size: 14px; font-weight: 400; padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--white); background: var(--bg-600); }
+    .nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .btn-primary { position: relative; cursor: pointer; z-index: 0; display: inline-flex; align-items: center; justify-content: center; gap: 8px; overflow: hidden; border-radius: 8px; background: var(--green); padding: 9px 20px; font-family: 'SuisseIntl', sans-serif; font-size: 14px; font-weight: 600; color: var(--green-text); text-decoration: none; border: none; letter-spacing: -0.01em; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), color 0.45s ease; }
+    .btn-primary::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 100%; background: #0c1408; transform: translateX(150%) translateY(150%) scale(2.5); transition: transform 0.65s cubic-bezier(0.4,0,0.2,1); }
+    .btn-primary:hover { transform: scale(1.04); color: var(--green); }
+    .btn-primary:hover::before { transform: translateX(0%) translateY(0%) scale(2.5); }
+    .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.7); font-family: 'SuisseIntl', sans-serif; font-size: 14px; font-weight: 600; padding: 9px 20px; border-radius: 8px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+    .btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 40px; height: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; padding: 0; flex-shrink: 0; }
+    .nav-hamburger span { display: block; width: 18px; height: 1.5px; background: rgba(255,255,255,0.75); border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
+    .nav-hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-menu-overlay { position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,0.65); backdrop-filter: blur(6px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .mobile-menu-overlay.is-open { opacity: 1; pointer-events: auto; }
+    .mobile-menu { position: fixed; top: 0; right: 0; width: 82%; max-width: 300px; height: 100dvh; z-index: 9999; background: #0d0d10; border-left: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.23,1,0.32,1); }
+    .mobile-menu.is-open { transform: translateX(0); }
+    .mobile-menu-head { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .mobile-menu-close { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.55); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .mobile-menu-nav { display: flex; flex-direction: column; padding: 12px; }
+    .mobile-menu-nav a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 17px; font-weight: 500; padding: 14px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: color 0.2s; }
+    .mobile-menu-actions { display: flex; flex-direction: column; gap: 10px; padding: 20px; margin-top: auto; }
+    .mobile-menu-actions .btn-primary { width: 100%; justify-content: center; font-size: 15px; padding: 14px 20px; }
+    .mobile-menu-demo { width: 100%; padding: 13px 20px; border: 1px solid rgba(255,255,255,0.18); border-radius: 8px; background: transparent; color: rgba(255,255,255,0.65); font-size: 15px; font-weight: 600; font-family: 'SuisseIntl', sans-serif; cursor: pointer; }
+
+    /* PAGE */
+    .legal-hero { padding: 80px 24px 56px; border-bottom: 1px solid var(--border); }
+    .legal-hero-inner { max-width: 760px; margin: 0 auto; }
+    .legal-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
+    .legal-title { font-size: clamp(32px, 5vw, 52px); font-weight: 700; letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 16px; }
+    .legal-meta { font-size: 13px; color: var(--white-faint); }
+
+    .legal-body { max-width: 760px; margin: 0 auto; padding: 56px 24px 96px; }
+    .legal-section { margin-bottom: 52px; }
+    .legal-section-title { font-size: 18px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .legal-section-sub { font-size: 15px; font-weight: 600; color: var(--white); margin: 20px 0 8px; }
+    .legal-text { font-size: 15px; color: var(--white-dim); line-height: 1.8; }
+    .legal-text + .legal-text { margin-top: 12px; }
+    .legal-list { list-style: none; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
+    .legal-list li { font-size: 15px; color: var(--white-dim); line-height: 1.7; padding-left: 18px; position: relative; }
+    .legal-list li::before { content: '—'; position: absolute; left: 0; color: var(--green); font-size: 12px; top: 3px; }
+    .legal-highlight { background: rgba(30,231,119,0.06); border: 1px solid rgba(30,231,119,0.15); border-radius: 10px; padding: 20px 24px; margin: 20px 0; }
+    .legal-highlight p { font-size: 14px; color: var(--white-dim); line-height: 1.7; }
+    .legal-highlight strong { color: var(--white); }
+    .legal-contact { background: var(--bg-800); border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; margin-top: 48px; }
+    .legal-contact h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+    .legal-contact p { font-size: 14px; color: var(--white-dim); line-height: 1.8; }
+    .legal-contact a { color: var(--green); text-decoration: none; }
+    .legal-contact a:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 56px 24px 40px; }
+    .footer-inner { max-width: 1120px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    .footer-logo { margin-bottom: 14px; }
+    .footer-logo img { height: 30px; }
+    .footer-tagline { font-size: 13px; color: var(--white-faint); line-height: 1.6; max-width: 220px; }
+    .footer-col-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white-faint); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { color: var(--white-dim); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; }
+    .footer-copy { font-size: 12px; color: var(--white-faint); }
+    .footer-made { font-size: 12px; color: var(--white-faint); }
+    .footer-made span { color: var(--green); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links, .nav-right { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-inner { height: 68px; padding: 0 16px; }
+      .nav-logo img { height: 44px; }
+      .legal-hero { padding: 56px 20px 40px; }
+      .legal-body { padding: 40px 20px 72px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+    @media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logov3.png" alt="Klutch" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <span style="display:none; font-family:'SuisseIntl',sans-serif; font-weight:700; font-size:22px; color:#1ee777;">Klutch</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="index.html#extensions">Extensions</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="btn-ghost" onclick="window.location.href='index.html#pricing'">Schedule Demo</button>
+        <button class="btn-primary" onclick="window.location.href='index.html#pricing'">Get Started</button>
+      </div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-head">
+      <img src="logov1.png" alt="Klutch" style="height:36px;">
+      <button class="mobile-menu-close" id="mobileMenuClose"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 3L3 11M3 3l8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    </div>
+    <nav class="mobile-menu-nav">
+      <a href="index.html#how-it-works">How It Works</a>
+      <a href="index.html#extensions">Extensions</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="mobile-menu-actions">
+      <button class="mobile-menu-demo" onclick="window.location.href='index.html#pricing'">Schedule Demo</button>
+      <button class="btn-primary" onclick="window.location.href='index.html#pricing'">Get Started</button>
+    </div>
+  </div>
+
+  <div class="legal-hero">
+    <div class="legal-hero-inner">
+      <p class="legal-eyebrow">Legal</p>
+      <h1 class="legal-title">Terms of Service</h1>
+      <p class="legal-meta">Effective Date: January 1, 2026 &nbsp;·&nbsp; Klutch</p>
+    </div>
+  </div>
+
+  <div class="legal-body">
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">SMS Messaging Terms &amp; Compliance</h2>
+
+      <div class="legal-section-sub">1. Program Description</div>
+      <p class="legal-text">This messaging program sends appointment confirmation and reminder messages to customers who have booked an appointment with Klutch through our website at klutch.io, or via our scheduling forms, and have explicitly opted in to receive SMS notifications. Opt-in is collected via web forms with a dedicated checkbox for SMS consent. Messages include scheduling confirmations, appointment reminders, rescheduling updates, and customer support communications.</p>
+
+      <div class="legal-section-sub">2. Cancellation Instructions</div>
+      <p class="legal-text">You can cancel the SMS service at any time. Simply text "STOP" to the same number that sent you messages. Upon sending "STOP," we will confirm your unsubscribe status via SMS. Following this confirmation, you will no longer receive SMS messages from us. To rejoin, sign up as you did initially, and we will resume sending SMS messages to you.</p>
+
+      <div class="legal-section-sub">3. Support Information</div>
+      <p class="legal-text">If you experience issues with the messaging program, reply with the keyword "HELP" for more assistance, or reach out directly to <a href="mailto:support@klutch.io" style="color:var(--green);">support@klutch.io</a> during business hours.</p>
+
+      <div class="legal-section-sub">4. Carrier Liability</div>
+      <p class="legal-text">Carriers are not liable for delayed or undelivered messages.</p>
+
+      <div class="legal-section-sub">5. Message &amp; Data Rates</div>
+      <p class="legal-text">Message and data rates may apply for messages sent to you from us and to us from you. Message frequency varies based on your service usage and appointment schedule. For questions about your text plan or data plan, contact your wireless provider.</p>
+
+      <div class="legal-section-sub">6. Supported Carriers</div>
+      <p class="legal-text">Our SMS program works with all major U.S. wireless carriers, including AT&T, T-Mobile, Verizon, Sprint, and most regional carriers.</p>
+
+      <div class="legal-section-sub">7. Age Restriction</div>
+      <p class="legal-text">You must be 18 years or older to participate in our SMS program.</p>
+
+      <div class="legal-highlight">
+        <p>We comply with all applicable laws and regulations, including the <strong>Telephone Consumer Protection Act (TCPA)</strong> and CTIA guidelines, regarding the use of SMS communications. For privacy-related inquiries, please refer to our <a href="privacy.html" style="color:var(--green);">Privacy Policy</a>.</p>
+      </div>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">General Terms</h2>
+      <p class="legal-text">This website (the "Site") is owned and operated by Klutch ("we" or "us"). By using the Site, you agree to be bound by these Terms of Service and to use the Site in accordance with these Terms of Service, our Privacy Policy, and any additional terms and conditions that may apply to specific sections of the Site or to products and services available through the Site or from Klutch.</p>
+      <p class="legal-text">Accessing the Site, in any manner, whether automated or otherwise, constitutes use of the Site and your agreement to be bound by these Terms of Service.</p>
+      <p class="legal-text">We reserve the right to change these Terms of Service or to impose new conditions on use of the Site from time to time, in which case we will post the revised Terms of Service on this website. By continuing to use the Site after we post any such changes, you accept the Terms of Service, as modified.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">Intellectual Property Rights</h2>
+      <div class="legal-section-sub">Our Limited License to You</div>
+      <p class="legal-text">This Site and all the materials available on the Site are the property of Klutch and/or our affiliates or licensors and are protected by copyright, trademark, and other intellectual property laws. The Site is provided solely for your personal non-commercial use.</p>
+      <p class="legal-text">You may not use the Site or the materials available on the Site in a manner that constitutes an infringement of our rights or that has not been authorized by us. Unless explicitly authorized, you may not modify, copy, reproduce, republish, upload, post, transmit, translate, sell, create derivative works, exploit, or distribute in any manner or medium any material from the Site.</p>
+
+      <div class="legal-section-sub">Your License to Us</div>
+      <p class="legal-text">By posting or submitting any material to us via the Site, you represent that you own the material or have obtained the necessary permissions. You grant us a royalty-free, perpetual, irrevocable, non-exclusive, worldwide license to use, modify, transmit, sell, exploit, create derivative works from, distribute, and publicly perform or display such material.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">Disclaimers</h2>
+      <p class="legal-text">Throughout the Site, we may provide links and pointers to Internet sites maintained by third parties. Our linking to such third-party sites does not imply an endorsement or sponsorship of such sites or the information, products, or services offered on or through the sites.</p>
+      <p class="legal-text">The information, products, and services offered on or through the Site are provided "as is" and without warranties of any kind, either express or implied. To the fullest extent permissible pursuant to applicable law, we disclaim all warranties, including implied warranties of merchantability and fitness for a particular purpose.</p>
+      <p class="legal-text">You agree at all times to indemnify and hold harmless Klutch, its affiliates, and their respective officers, directors, agents, and employees from any claims, causes of action, damages, liabilities, costs, and expenses arising out of or related to your breach of any obligation, warranty, or representation under these Terms of Service.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">Online Commerce</h2>
+      <p class="legal-text">Certain sections of the Site may allow you to purchase products and services. We are not responsible for the quality, accuracy, timeliness, reliability, or any other aspect of these products and services.</p>
+      <p class="legal-text">Your participation in any dealings with third-party vendors is solely between you and the third party. Klutch shall not be responsible for any loss or damage incurred as a result of such dealings.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">Registration &amp; Passwords</h2>
+      <p class="legal-text">To access certain features of the Site, you may be required to register and create an account. You agree to provide accurate, current, and complete information during the registration process. You are responsible for maintaining the confidentiality of your login credentials and for all activities conducted under your account.</p>
+      <p class="legal-text">If you suspect unauthorized use of your account, notify us immediately at <a href="mailto:support@klutch.io" style="color:var(--green);">support@klutch.io</a>. We are not liable for any loss or damage arising from your failure to comply with this obligation.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">Termination</h2>
+      <p class="legal-text">We reserve the right to terminate or suspend your access to the Site, without notice, if we determine that you have violated these Terms of Service or engaged in conduct that we deem inappropriate or unlawful. Upon termination, you must cease all use of the Site and any content obtained from it.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">Governing Law</h2>
+      <p class="legal-text">These Terms of Service shall be governed by and construed in accordance with the laws of the state in which Klutch operates. Any dispute arising under these Terms shall be resolved exclusively through binding arbitration in that jurisdiction.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">Changes to Terms of Service</h2>
+      <p class="legal-text">We may update these Terms of Service from time to time. The latest version will always be available on our website with the effective date.</p>
+    </div>
+
+    <div class="legal-contact">
+      <h3>Contact Us</h3>
+      <p>For any questions regarding these Terms of Service, please contact us at:<br><br>
+        <strong>Klutch</strong><br>
+        Email: <a href="mailto:support@klutch.io">support@klutch.io</a><br>
+        Website: <a href="https://klutch.io">klutch.io</a>
+      </p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo"><img src="logov3.png" alt="Klutch" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><span style="display:none; font-family:'SuisseIntl',sans-serif; font-weight:700; font-size:18px; color:#1ee777;">Klutch</span></div>
+          <p class="footer-tagline">Tools for closers. Not browsers. Built in SoCal.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Product</div>
+          <ul class="footer-links">
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="index.html#extensions">Extensions</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Extensions</div>
+          <ul class="footer-links">
+            <li><a href="index.html#extensions">Auto Lister</a></li>
+            <li><a href="index.html#extensions">Group Poster</a></li>
+            <li><a href="index.html#extensions">Price Refresher</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="mailto:support@klutch.io">Contact</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Klutch. All rights reserved.</p>
+        <p class="footer-made">Built in SoCal. <span>Tools for closers.</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const hamburger = document.getElementById('navHamburger');
+      const menu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileMenuOverlay');
+      const closeBtn = document.getElementById('mobileMenuClose');
+      function openMenu() { hamburger.classList.add('is-open'); menu.classList.add('is-open'); overlay.classList.add('is-open'); document.body.style.overflow = 'hidden'; }
+      function close() { hamburger.classList.remove('is-open'); menu.classList.remove('is-open'); overlay.classList.remove('is-open'); document.body.style.overflow = ''; }
+      hamburger.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', close);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Klutch</title>
+  <style>
+    @font-face { font-family: 'SuisseIntl'; src: url('Fonts/Suisse Int\'l/SuisseIntl-Regular.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: 'SuisseIntl'; src: url('Fonts/Suisse Int\'l/SuisseIntl-Medium.otf') format('opentype'); font-weight: 500; }
+    @font-face { font-family: 'SuisseIntl'; src: url('Fonts/Suisse Int\'l/SuisseIntl-SemiBold.otf') format('opentype'); font-weight: 600; }
+    @font-face { font-family: 'SuisseIntl'; src: url('Fonts/Suisse Int\'l/SuisseIntl-Bold.otf') format('opentype'); font-weight: 700; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #101012; --bg-800: #18181c; --bg-700: #1f1f24; --bg-600: #26262d;
+      --border: rgba(255,255,255,0.08);
+      --green: #1ee777; --green-text: #2a3010;
+      --violet: #7B6BF5;
+      --white: #f2f2f4; --white-dim: rgba(242,242,244,0.6); --white-faint: rgba(242,242,244,0.3);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'SuisseIntl', sans-serif; background: var(--bg); color: var(--white); line-height: 1.6; overflow-x: hidden; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(16,16,18,0.88); backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 24px; height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 70px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { color: var(--white-dim); text-decoration: none; font-size: 14px; font-weight: 400; padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--white); background: var(--bg-600); }
+    .nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .btn-primary { position: relative; cursor: pointer; z-index: 0; display: inline-flex; align-items: center; justify-content: center; gap: 8px; overflow: hidden; border-radius: 8px; background: var(--green); padding: 9px 20px; font-family: 'SuisseIntl', sans-serif; font-size: 14px; font-weight: 600; color: var(--green-text); text-decoration: none; border: none; letter-spacing: -0.01em; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), color 0.45s ease; }
+    .btn-primary::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 100%; background: #0c1408; transform: translateX(150%) translateY(150%) scale(2.5); transition: transform 0.65s cubic-bezier(0.4,0,0.2,1); }
+    .btn-primary:hover { transform: scale(1.04); color: var(--green); }
+    .btn-primary:hover::before { transform: translateX(0%) translateY(0%) scale(2.5); }
+    .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.7); font-family: 'SuisseIntl', sans-serif; font-size: 14px; font-weight: 600; padding: 9px 20px; border-radius: 8px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+    .btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 40px; height: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; padding: 0; flex-shrink: 0; }
+    .nav-hamburger span { display: block; width: 18px; height: 1.5px; background: rgba(255,255,255,0.75); border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
+    .nav-hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-menu-overlay { position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,0.65); backdrop-filter: blur(6px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .mobile-menu-overlay.is-open { opacity: 1; pointer-events: auto; }
+    .mobile-menu { position: fixed; top: 0; right: 0; width: 82%; max-width: 300px; height: 100dvh; z-index: 9999; background: #0d0d10; border-left: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.23,1,0.32,1); }
+    .mobile-menu.is-open { transform: translateX(0); }
+    .mobile-menu-head { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .mobile-menu-close { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.55); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .mobile-menu-nav { display: flex; flex-direction: column; padding: 12px; }
+    .mobile-menu-nav a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 17px; font-weight: 500; padding: 14px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: color 0.2s; }
+    .mobile-menu-actions { display: flex; flex-direction: column; gap: 10px; padding: 20px; margin-top: auto; }
+    .mobile-menu-actions .btn-primary { width: 100%; justify-content: center; font-size: 15px; padding: 14px 20px; }
+    .mobile-menu-demo { width: 100%; padding: 13px 20px; border: 1px solid rgba(255,255,255,0.18); border-radius: 8px; background: transparent; color: rgba(255,255,255,0.65); font-size: 15px; font-weight: 600; font-family: 'SuisseIntl', sans-serif; cursor: pointer; }
+
+    /* IMPORTANT NOTICE BANNER */
+    .privacy-notice { background: rgba(30,231,119,0.07); border-bottom: 1px solid rgba(30,231,119,0.15); padding: 16px 24px; text-align: center; }
+    .privacy-notice p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; max-width: 720px; margin: 0 auto; }
+    .privacy-notice strong { color: var(--white); }
+
+    .legal-hero { padding: 80px 24px 56px; border-bottom: 1px solid var(--border); }
+    .legal-hero-inner { max-width: 760px; margin: 0 auto; }
+    .legal-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--violet); margin-bottom: 16px; }
+    .legal-title { font-size: clamp(32px, 5vw, 52px); font-weight: 700; letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 16px; }
+    .legal-meta { font-size: 13px; color: var(--white-faint); }
+
+    .legal-body { max-width: 760px; margin: 0 auto; padding: 56px 24px 96px; }
+    .legal-section { margin-bottom: 52px; }
+    .legal-section-title { font-size: 18px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .legal-section-sub { font-size: 15px; font-weight: 600; color: var(--white); margin: 20px 0 8px; }
+    .legal-text { font-size: 15px; color: var(--white-dim); line-height: 1.8; }
+    .legal-text + .legal-text { margin-top: 12px; }
+    .legal-list { list-style: none; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
+    .legal-list li { font-size: 15px; color: var(--white-dim); line-height: 1.7; padding-left: 18px; position: relative; }
+    .legal-list li::before { content: '—'; position: absolute; left: 0; color: var(--violet); font-size: 12px; top: 3px; }
+    .legal-highlight { background: rgba(123,107,245,0.06); border: 1px solid rgba(123,107,245,0.18); border-radius: 10px; padding: 20px 24px; margin: 20px 0; }
+    .legal-highlight p { font-size: 14px; color: var(--white-dim); line-height: 1.7; }
+    .legal-highlight strong { color: var(--white); }
+    .legal-contact { background: var(--bg-800); border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; margin-top: 48px; }
+    .legal-contact h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+    .legal-contact p { font-size: 14px; color: var(--white-dim); line-height: 1.8; }
+    .legal-contact a { color: var(--green); text-decoration: none; }
+    .legal-contact a:hover { text-decoration: underline; }
+
+    footer { border-top: 1px solid var(--border); padding: 56px 24px 40px; }
+    .footer-inner { max-width: 1120px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    .footer-logo { margin-bottom: 14px; }
+    .footer-logo img { height: 30px; }
+    .footer-tagline { font-size: 13px; color: var(--white-faint); line-height: 1.6; max-width: 220px; }
+    .footer-col-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white-faint); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { color: var(--white-dim); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; }
+    .footer-copy { font-size: 12px; color: var(--white-faint); }
+    .footer-made { font-size: 12px; color: var(--white-faint); }
+    .footer-made span { color: var(--green); }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-right { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-inner { height: 68px; padding: 0 16px; }
+      .nav-logo img { height: 44px; }
+      .legal-hero { padding: 56px 20px 40px; }
+      .legal-body { padding: 40px 20px 72px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+    @media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logov3.png" alt="Klutch" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <span style="display:none; font-family:'SuisseIntl',sans-serif; font-weight:700; font-size:22px; color:#1ee777;">Klutch</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="index.html#extensions">Extensions</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="btn-ghost" onclick="window.location.href='index.html#pricing'">Schedule Demo</button>
+        <button class="btn-primary" onclick="window.location.href='index.html#pricing'">Get Started</button>
+      </div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-head">
+      <img src="logov1.png" alt="Klutch" style="height:36px;">
+      <button class="mobile-menu-close" id="mobileMenuClose"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 3L3 11M3 3l8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    </div>
+    <nav class="mobile-menu-nav">
+      <a href="index.html#how-it-works">How It Works</a>
+      <a href="index.html#extensions">Extensions</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="mobile-menu-actions">
+      <button class="mobile-menu-demo" onclick="window.location.href='index.html#pricing'">Schedule Demo</button>
+      <button class="btn-primary" onclick="window.location.href='index.html#pricing'">Get Started</button>
+    </div>
+  </div>
+
+  <div class="privacy-notice">
+    <p><strong>Important:</strong> Klutch does NOT share customer opt-in information, including phone numbers and consent records, with any affiliates or third parties for marketing or promotional purposes. All text messaging originator opt-in data is kept strictly confidential.</p>
+  </div>
+
+  <div class="legal-hero">
+    <div class="legal-hero-inner">
+      <p class="legal-eyebrow">Legal</p>
+      <h1 class="legal-title">Privacy Policy</h1>
+      <p class="legal-meta">Effective Date: January 1, 2026 &nbsp;·&nbsp; Klutch</p>
+    </div>
+  </div>
+
+  <div class="legal-body">
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">1. Information We Collect</h2>
+      <div class="legal-section-sub">Personal Information</div>
+      <ul class="legal-list">
+        <li>Name, email address, phone number, physical address</li>
+        <li>Payment information when you make a purchase or request a quote</li>
+        <li>Opt-in records and timestamps for all communication channels (SMS, email, etc.)</li>
+      </ul>
+      <div class="legal-section-sub">Non-Personal Information</div>
+      <ul class="legal-list">
+        <li>IP address, browser type, device information</li>
+        <li>Website usage patterns and analytics</li>
+        <li>Cookies and similar technologies</li>
+      </ul>
+      <div class="legal-section-sub">Customer Communication</div>
+      <ul class="legal-list">
+        <li>Records of inquiries and service requests</li>
+        <li>Appointment details and preferences</li>
+        <li>Service history and feedback</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">2. How We Use Your Information</h2>
+      <p class="legal-text">We use collected data for:</p>
+      <ul class="legal-list">
+        <li>Providing and improving our services</li>
+        <li>Processing transactions and payments</li>
+        <li>Communicating with you about your inquiries, appointments, and promotions</li>
+        <li>Enhancing website functionality and user experience</li>
+        <li>Ensuring security and fraud prevention</li>
+        <li>Maintaining records of your communication preferences and consent</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">3. SMS Messaging &amp; Compliance</h2>
+
+      <div class="legal-section-sub">Opt-In &amp; Consent</div>
+      <ul class="legal-list">
+        <li>You will only receive messages if you have explicitly opted in</li>
+        <li>We maintain timestamped records of all opt-in actions</li>
+        <li>We comply with the Telephone Consumer Protection Act (TCPA) and all applicable laws</li>
+      </ul>
+
+      <div class="legal-section-sub">Opt-Out Instructions</div>
+      <ul class="legal-list">
+        <li>You can cancel SMS notifications at any time by replying "STOP"</li>
+        <li>You will receive a final confirmation message, and no further messages will be sent unless you re-opt in</li>
+        <li>All opt-out requests are processed immediately</li>
+      </ul>
+
+      <div class="legal-section-sub">Message Frequency &amp; Content</div>
+      <ul class="legal-list">
+        <li>Message frequency varies based on your interactions with our business</li>
+        <li>Messages will be directly related to the services you have requested</li>
+        <li>We do not send promotional content without specific consent</li>
+      </ul>
+
+      <div class="legal-section-sub">Help &amp; Support</div>
+      <p class="legal-text">Reply "HELP" for assistance or contact us at <a href="mailto:support@klutch.io" style="color:var(--green);">support@klutch.io</a>. Customer support is available during regular business hours.</p>
+
+      <div class="legal-section-sub">Carrier Information</div>
+      <ul class="legal-list">
+        <li>Standard message and data rates may apply</li>
+        <li>Carriers are not liable for delayed or undelivered messages</li>
+        <li>Supported carriers include AT&T, Verizon, T-Mobile, Sprint, and most regional carriers</li>
+      </ul>
+
+      <div class="legal-highlight">
+        <p><strong>SMS Data Protection Statement:</strong> No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. Information sharing to subcontractors in support services, such as customer service, is permitted. All other use case categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</p>
+      </div>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">4. Information Sharing &amp; Disclosure</h2>
+      <p class="legal-text">We do not sell, rent, or trade personal information. We may share information with:</p>
+
+      <div class="legal-section-sub">Service Providers</div>
+      <ul class="legal-list">
+        <li>Third-party vendors who assist in our operations (e.g., payment processing, appointment scheduling)</li>
+        <li>SMS aggregators and providers solely for the purpose of delivering messages you've consented to receive</li>
+        <li>All service providers are contractually obligated to maintain confidentiality and security</li>
+      </ul>
+
+      <div class="legal-section-sub">Legal Compliance</div>
+      <ul class="legal-list">
+        <li>If required by law, legal process, or to protect our rights</li>
+        <li>In response to valid law enforcement requests or court orders</li>
+      </ul>
+
+      <div class="legal-section-sub">Business Transfers</div>
+      <p class="legal-text">In case of mergers, acquisitions, or sale of assets, your data remains protected under the terms of this policy. All of the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties, excluding aggregators and providers of the text message services.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">5. Data Security</h2>
+      <p class="legal-text">We implement and maintain reasonable security measures to protect your personal information:</p>
+      <ul class="legal-list">
+        <li>Encryption of sensitive data in transit and at rest</li>
+        <li>Secure access controls and authentication mechanisms</li>
+        <li>Regular security assessments and updates</li>
+        <li>Employee training on data protection</li>
+        <li>Breach notification protocols in accordance with applicable laws</li>
+        <li>Secure backup systems and disaster recovery procedures</li>
+      </ul>
+      <p class="legal-text" style="margin-top:12px;">Despite these measures, no method of transmission over the Internet is 100% secure. We strive to use commercially acceptable means to protect your personal information but cannot guarantee absolute security.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">6. Cookies &amp; Tracking Technologies</h2>
+      <p class="legal-text">We use cookies and similar technologies to analyze site traffic, remember your preferences, improve website functionality, and measure the effectiveness of our services. You may control cookies through your browser settings. Disabling cookies may limit your ability to use certain features of our website.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">7. Your Rights &amp; Choices</h2>
+      <p class="legal-text">You have the right to:</p>
+      <ul class="legal-list">
+        <li>Access, update, or delete your personal information</li>
+        <li>Opt-out of marketing emails by clicking "unsubscribe" in our emails</li>
+        <li>Opt-out of SMS messages by replying "STOP"</li>
+        <li>Request information on how we process your data</li>
+        <li>Withdraw consent at any time for future communications</li>
+        <li>Lodge a complaint with a supervisory authority if you believe your rights have been violated</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">8. Third-Party Links</h2>
+      <p class="legal-text">Our website may contain links to third-party websites. We are not responsible for their privacy practices and encourage you to review their policies. This privacy policy applies only to information collected by Klutch.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-section-title">9. Changes to This Privacy Policy</h2>
+      <p class="legal-text">We may update this policy periodically. The latest version will always be available on our website with the effective date. For significant changes, we will notify you by email or through a notice on our website.</p>
+    </div>
+
+    <div class="legal-contact">
+      <h3>10. Contact Us</h3>
+      <p>If you have questions about this Privacy Policy or how your information is handled, contact us at:<br><br>
+        <strong>Klutch</strong><br>
+        Email: <a href="mailto:support@klutch.io">support@klutch.io</a><br>
+        Website: <a href="https://klutch.io">klutch.io</a><br><br>
+        By using our website and services, you consent to this Privacy Policy.
+      </p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo"><img src="logov3.png" alt="Klutch" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><span style="display:none; font-family:'SuisseIntl',sans-serif; font-weight:700; font-size:18px; color:#1ee777;">Klutch</span></div>
+          <p class="footer-tagline">Tools for closers. Not browsers. Built in SoCal.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Product</div>
+          <ul class="footer-links">
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="index.html#extensions">Extensions</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Extensions</div>
+          <ul class="footer-links">
+            <li><a href="index.html#extensions">Auto Lister</a></li>
+            <li><a href="index.html#extensions">Group Poster</a></li>
+            <li><a href="index.html#extensions">Price Refresher</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="mailto:support@klutch.io">Contact</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Klutch. All rights reserved.</p>
+        <p class="footer-made">Built in SoCal. <span>Tools for closers.</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const hamburger = document.getElementById('navHamburger');
+      const menu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileMenuOverlay');
+      const closeBtn = document.getElementById('mobileMenuClose');
+      function openMenu() { hamburger.classList.add('is-open'); menu.classList.add('is-open'); overlay.classList.add('is-open'); document.body.style.overflow = 'hidden'; }
+      function close() { hamburger.classList.remove('is-open'); menu.classList.remove('is-open'); overlay.classList.remove('is-open'); document.body.style.overflow = ''; }
+      hamburger.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', close);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    })();
+  </script>
+</body>
+</html>

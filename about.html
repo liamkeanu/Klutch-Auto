@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Klutch</title>
+  <meta name="description" content="Built by a rep who figured it out. Klutch is the Marketplace system that actually closes.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @font-face { font-family: 'SuisseIntl'; src: url('Fonts/Suisse Int\'l/SuisseIntl-Regular.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: 'SuisseIntl'; src: url('Fonts/Suisse Int\'l/SuisseIntl-Medium.otf') format('opentype'); font-weight: 500; }
+    @font-face { font-family: 'SuisseIntl'; src: url('Fonts/Suisse Int\'l/SuisseIntl-SemiBold.otf') format('opentype'); font-weight: 600; }
+    @font-face { font-family: 'SuisseIntl'; src: url('Fonts/Suisse Int\'l/SuisseIntl-Bold.otf') format('opentype'); font-weight: 700; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #101012; --bg-800: #18181c; --bg-700: #1f1f24; --bg-600: #26262d;
+      --border: rgba(255,255,255,0.08);
+      --green: #1ee777; --green-text: #2a3010;
+      --violet: #7B6BF5;
+      --white: #f2f2f4; --white-dim: rgba(242,242,244,0.6); --white-faint: rgba(242,242,244,0.3);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'SuisseIntl', sans-serif; background: var(--bg); color: var(--white); line-height: 1.6; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(16,16,18,0.88); backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 24px; height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 70px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { color: var(--white-dim); text-decoration: none; font-size: 14px; font-weight: 400; padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--white); background: var(--bg-600); }
+    .nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .btn-primary { position: relative; cursor: pointer; z-index: 0; display: inline-flex; align-items: center; justify-content: center; gap: 8px; overflow: hidden; border-radius: 8px; background: var(--green); padding: 9px 20px; font-family: 'SuisseIntl', sans-serif; font-size: 14px; font-weight: 600; color: var(--green-text); text-decoration: none; border: none; letter-spacing: -0.01em; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), color 0.45s ease; }
+    .btn-primary::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 100%; background: #0c1408; transform: translateX(150%) translateY(150%) scale(2.5); transition: transform 0.65s cubic-bezier(0.4,0,0.2,1); }
+    .btn-primary:hover { transform: scale(1.04); color: var(--green); }
+    .btn-primary:hover::before { transform: translateX(0%) translateY(0%) scale(2.5); }
+    .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.7); font-family: 'SuisseIntl', sans-serif; font-size: 14px; font-weight: 600; padding: 9px 20px; border-radius: 8px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+    .btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+
+    /* HAMBURGER */
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 40px; height: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; padding: 0; flex-shrink: 0; }
+    .nav-hamburger span { display: block; width: 18px; height: 1.5px; background: rgba(255,255,255,0.75); border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
+    .nav-hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-menu-overlay { position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,0.65); backdrop-filter: blur(6px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .mobile-menu-overlay.is-open { opacity: 1; pointer-events: auto; }
+    .mobile-menu { position: fixed; top: 0; right: 0; width: 82%; max-width: 300px; height: 100dvh; z-index: 9999; background: #0d0d10; border-left: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; padding: 0; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.23,1,0.32,1); }
+    .mobile-menu.is-open { transform: translateX(0); }
+    .mobile-menu-head { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .mobile-menu-close { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.55); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .mobile-menu-nav { display: flex; flex-direction: column; padding: 12px; }
+    .mobile-menu-nav a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 17px; font-weight: 500; padding: 14px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: color 0.2s; }
+    .mobile-menu-actions { display: flex; flex-direction: column; gap: 10px; padding: 20px; margin-top: auto; }
+    .mobile-menu-actions .btn-primary { width: 100%; justify-content: center; font-size: 15px; padding: 14px 20px; }
+    .mobile-menu-demo { width: 100%; padding: 13px 20px; border: 1px solid rgba(255,255,255,0.18); border-radius: 8px; background: transparent; color: rgba(255,255,255,0.65); font-size: 15px; font-weight: 600; font-family: 'SuisseIntl', sans-serif; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+
+    /* PAGE HERO */
+    .about-hero { padding: 96px 24px 80px; text-align: center; position: relative; overflow: hidden; }
+    .about-hero::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 700px; height: 500px; background: radial-gradient(ellipse at center, rgba(30,231,119,0.08) 0%, transparent 65%); pointer-events: none; }
+    .about-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 20px; }
+    .about-headline { font-size: clamp(36px, 5vw, 64px); font-weight: 700; letter-spacing: -0.04em; line-height: 1.05; color: var(--white); max-width: 780px; margin: 0 auto 24px; }
+    .about-subhead { font-size: 18px; font-weight: 400; color: var(--white-dim); max-width: 520px; margin: 0 auto; line-height: 1.65; }
+
+    /* CONTENT */
+    .about-wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+    .about-section { padding: 72px 0; border-top: 1px solid var(--border); }
+    .about-section:first-child { border-top: none; }
+    .about-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--violet); margin-bottom: 16px; }
+    .about-section-title { font-size: clamp(24px, 4vw, 38px); font-weight: 700; letter-spacing: -0.035em; color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+    .about-body { font-size: 16px; color: var(--white-dim); line-height: 1.8; }
+    .about-body p + p { margin-top: 16px; }
+    .about-body strong { color: var(--white); font-weight: 600; }
+
+    /* FOUNDER CARD */
+    .founder-card { background: var(--bg-800); border: 1px solid var(--border); border-radius: 20px; padding: 40px; margin-top: 48px; display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start; }
+    .founder-avatar { width: 88px; height: 88px; border-radius: 50%; background: linear-gradient(135deg, rgba(30,231,119,0.2) 0%, rgba(123,107,245,0.2) 100%); border: 2px solid rgba(30,231,119,0.3); display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; color: var(--green); flex-shrink: 0; letter-spacing: -0.02em; }
+    .founder-name { font-size: 20px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; margin-bottom: 4px; }
+    .founder-title { font-size: 13px; color: var(--green); font-weight: 500; margin-bottom: 16px; }
+    .founder-bio { font-size: 15px; color: var(--white-dim); line-height: 1.7; }
+
+    /* STATS ROW */
+    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+    .stat-card { background: var(--bg-800); border: 1px solid var(--border); border-radius: 14px; padding: 28px 24px; }
+    .stat-num { font-size: 42px; font-weight: 700; letter-spacing: -0.04em; color: var(--green); line-height: 1; margin-bottom: 8px; }
+    .stat-label { font-size: 13px; color: var(--white-dim); line-height: 1.5; }
+
+    /* QUOTE */
+    .about-quote { background: linear-gradient(135deg, rgba(30,231,119,0.05) 0%, rgba(123,107,245,0.06) 100%); border: 1px solid rgba(30,231,119,0.15); border-radius: 16px; padding: 36px 40px; margin-top: 48px; position: relative; }
+    .about-quote::before { content: '"'; position: absolute; top: 16px; left: 28px; font-size: 80px; color: var(--green); opacity: 0.25; line-height: 1; font-weight: 700; }
+    .about-quote-text { font-size: 20px; font-weight: 500; color: var(--white); line-height: 1.55; letter-spacing: -0.02em; padding-top: 24px; }
+    .about-quote-attr { margin-top: 16px; font-size: 13px; color: var(--white-faint); }
+
+    /* CTA */
+    .about-cta { padding: 96px 24px; text-align: center; background: var(--bg-800); border-top: 1px solid var(--border); }
+    .about-cta-title { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -0.04em; margin-bottom: 16px; }
+    .about-cta-sub { font-size: 16px; color: var(--white-dim); margin-bottom: 36px; }
+    .about-cta-btns { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .btn-primary-lg { font-size: 16px; padding: 13px 28px; border-radius: 10px; }
+    .btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 8px; background: transparent; border: 1px solid rgba(255,255,255,0.18); padding: 9px 20px; font-family: 'SuisseIntl', sans-serif; font-size: 14px; font-weight: 600; color: var(--white-dim); text-decoration: none; cursor: pointer; transition: color 0.25s, border-color 0.25s; }
+    .btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.35); }
+    .btn-secondary-lg { font-size: 16px; padding: 12px 28px; border-radius: 10px; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 56px 24px 40px; }
+    .footer-inner { max-width: 1120px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    .footer-logo { margin-bottom: 14px; }
+    .footer-logo img { height: 30px; }
+    .footer-tagline { font-size: 13px; color: var(--white-faint); line-height: 1.6; max-width: 220px; }
+    .footer-col-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white-faint); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { color: var(--white-dim); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; }
+    .footer-copy { font-size: 12px; color: var(--white-faint); }
+    .footer-made { font-size: 12px; color: var(--white-faint); }
+    .footer-made span { color: var(--green); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links, .nav-right { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-inner { height: 68px; padding: 0 16px; }
+      .nav-logo img { height: 44px; }
+      .about-hero { padding: 64px 20px 56px; }
+      .about-wrap { padding: 0 20px; }
+      .founder-card { grid-template-columns: 1fr; gap: 20px; padding: 28px; }
+      .stats-row { grid-template-columns: 1fr; }
+      .about-quote { padding: 28px 24px; }
+      .about-cta-btns { flex-direction: column; align-items: stretch; max-width: 340px; margin: 0 auto 0; }
+      .about-cta-btns .btn-primary, .about-cta-btns .btn-secondary { width: 100%; justify-content: center; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+    @media (max-width: 480px) {
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logov3.png" alt="Klutch" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <span style="display:none; font-family:'SuisseIntl',sans-serif; font-weight:700; font-size:22px; color:#1ee777;">Klutch</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="index.html#extensions">Extensions</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="btn-ghost" onclick="window.location.href='index.html#pricing'">Schedule Demo</button>
+        <button class="btn-primary" onclick="window.location.href='index.html#pricing'">Get Started</button>
+      </div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-head">
+      <img src="logov1.png" alt="Klutch" style="height:36px;">
+      <button class="mobile-menu-close" id="mobileMenuClose">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 3L3 11M3 3l8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <nav class="mobile-menu-nav">
+      <a href="index.html#how-it-works" onclick="closeMobileMenu()">How It Works</a>
+      <a href="index.html#extensions" onclick="closeMobileMenu()">Extensions</a>
+      <a href="index.html#pricing" onclick="closeMobileMenu()">Pricing</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="mobile-menu-actions">
+      <button class="mobile-menu-demo" onclick="window.location.href='index.html#pricing'">Schedule Demo</button>
+      <button class="btn-primary" onclick="window.location.href='index.html#pricing'">Get Started</button>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="about-hero">
+    <p class="about-eyebrow">Our Story</p>
+    <h1 class="about-headline">Built by the floor,<br>for the floor.</h1>
+    <p class="about-subhead">Klutch didn't start in a boardroom. It started on a showroom floor — where one rep figured out what everyone else was missing.</p>
+  </div>
+
+  <!-- Content -->
+  <div class="about-wrap">
+
+    <!-- Founder section -->
+    <div class="about-section">
+      <p class="about-label">The Founder</p>
+      <h2 class="about-section-title">One rep. Two years on top.<br>One system that changed everything.</h2>
+      <div class="about-body">
+        <p>Liam Aguiling spent two years as a sales associate at a Chrysler Dodge Jeep Ram dealership — and spent two of those years at the top of the board. Not by luck. Not by working more hours. By mastering a channel everyone else was sleeping on: <strong>Facebook Marketplace</strong>.</p>
+        <p>While other reps were copying and pasting listings one by one, Liam was engineering a system. While others were posting and forgetting, he was refreshing, reposting, and routing leads in real time. Marketplace wasn't a side channel — it was his primary source of floor traffic.</p>
+        <p>The tools didn't exist yet. So he built them.</p>
+      </div>
+      <div class="founder-card">
+        <div class="founder-avatar">LA</div>
+        <div>
+          <div class="founder-name">Liam Aguiling</div>
+          <div class="founder-title">Founder — Klutch</div>
+          <p class="founder-bio">Former top sales associate at a Chrysler Dodge Jeep Ram store. 2-year consecutive top performer. Built the Klutch system from the ground up to solve the exact problems he lived on the floor. Now teaching every rep willing to listen.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="about-section">
+      <p class="about-label">By the numbers</p>
+      <h2 class="about-section-title">Proven on the floor before it was a product.</h2>
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num">2x</div>
+          <div class="stat-label">Consecutive years as top sales at a CDJR store</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2yr</div>
+          <div class="stat-label">Deep study of Facebook Marketplace strategies & algorithms</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Chrome extensions built from real floor experience</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why -->
+    <div class="about-section">
+      <p class="about-label">Why Klutch Exists</p>
+      <h2 class="about-section-title">Every rep has the same problem.<br>Nobody was solving it.</h2>
+      <div class="about-body">
+        <p>Marketplace is the single most underutilized lead source in automotive retail. The inventory is there. The buyers are there. But most dealerships are posting the same copy-paste listings as everyone else — and wondering why nobody calls.</p>
+        <p>The reps who close on Marketplace aren't posting more. <strong>They're posting smarter.</strong> They understand visibility windows, pricing signals, group distribution, and follow-up timing. That's the Klutch Method — the same playbook Liam ran for two years before anyone else knew it worked.</p>
+        <p>Klutch automates the mechanical work so you can focus on the strategy. Auto Lister pulls your inventory and fills every field. Group Poster distributes to the right audiences. Price Refresher keeps you visible when listings go stale. The method handles the rest.</p>
+      </div>
+      <div class="about-quote">
+        <p class="about-quote-text">The floor is talking — are you listening? Most reps are posting. Klutch reps are closing.</p>
+        <p class="about-quote-attr">— Liam Aguiling, Founder</p>
+      </div>
+    </div>
+
+    <!-- Mission -->
+    <div class="about-section">
+      <p class="about-label">Our Mission</p>
+      <h2 class="about-section-title">Tools for closers.<br>Not browsers.</h2>
+      <div class="about-body">
+        <p>Klutch is built for the rep who's already hungry — who doesn't need motivation, just the right tools. We don't build features for the sake of features. Everything in Klutch has been validated on a real dealership floor before it ships.</p>
+        <p>We're not a marketing company selling you a promise. We're the rep from the floor who figured it out and built the kit to scale it. If you're serious about Marketplace, you're in the right place.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <div class="about-cta">
+    <h2 class="about-cta-title">Ready to close more deals?</h2>
+    <p class="about-cta-sub">Get the same system that turned Marketplace into a real lead source.</p>
+    <div class="about-cta-btns">
+      <a href="index.html#pricing" class="btn-primary btn-primary-lg">Get Access Now</a>
+      <a href="index.html#pricing" class="btn-secondary btn-secondary-lg">See Plans</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">
+            <img src="logov3.png" alt="Klutch" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <span style="display:none; font-family:'SuisseIntl',sans-serif; font-weight:700; font-size:18px; color:#1ee777;">Klutch</span>
+          </div>
+          <p class="footer-tagline">Tools for closers. Not browsers. Built in SoCal.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Product</div>
+          <ul class="footer-links">
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="index.html#extensions">Extensions</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Extensions</div>
+          <ul class="footer-links">
+            <li><a href="index.html#extensions">Auto Lister</a></li>
+            <li><a href="index.html#extensions">Group Poster</a></li>
+            <li><a href="index.html#extensions">Price Refresher</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="mailto:support@klutch.io">Contact</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Klutch. All rights reserved.</p>
+        <p class="footer-made">Built in SoCal. <span>Tools for closers.</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const hamburger = document.getElementById('navHamburger');
+      const menu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileMenuOverlay');
+      const closeBtn = document.getElementById('mobileMenuClose');
+      function openMenu() { hamburger.classList.add('is-open'); menu.classList.add('is-open'); overlay.classList.add('is-open'); document.body.style.overflow = 'hidden'; }
+      function closeMobileMenu() { hamburger.classList.remove('is-open'); menu.classList.remove('is-open'); overlay.classList.remove('is-open'); document.body.style.overflow = ''; }
+      window.closeMobileMenu = closeMobileMenu;
+      hamburger.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', closeMobileMenu);
+      overlay.addEventListener('click', closeMobileMenu);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileMenu(); });
+    })();
+  </script>
+</body>
+</html>

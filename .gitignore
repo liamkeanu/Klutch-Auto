@@ -1,0 +1,20 @@
+temporary screenshots/
+node_modules/
+*.log
+
+# Working/dev files
+CLAUDE.md
+SKILL.md
+klutch-auto-what-is-it.md
+screenshot.mjs
+screenshot-section.mjs
+screenshot-sections.mjs
+ss-checks.mjs
+ss-dot.mjs
+ss-new.mjs
+ss-trust.mjs
+serve.mjs
+reference2.png
+Reference3.png
+reference 3 style code.txt
+Style code reference 2.txt
