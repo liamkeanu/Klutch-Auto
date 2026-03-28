@@ -3906,6 +3906,102 @@
     .catch(() => { btn.innerHTML = originalHTML; btn.disabled = false; });
   }
 
+  // ===== PRICING MODAL =====
+  (function () {
+    const modal    = document.getElementById('pricingModal');
+    const overlay  = document.getElementById('pricingModalOverlay');
+    const closeBtn = document.getElementById('pricingModalClose');
+    const badge    = document.getElementById('pricingModalBadge');
+    const canvas   = document.getElementById('pricingModalCanvas');
+    let stripeUrl  = '';
+
+    window.openPricingModal = function(plan, url) {
+      stripeUrl = url;
+      badge.textContent = plan;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      initPM();
+    };
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      stopPM();
+    }
+
+    overlay.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeModal);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal(); });
+
+    let afPM = null, circlesPM = [], ctxPM, WPM, HPM;
+    const mPM = { x: 0, y: 0 };
+
+    function initPM() {
+      if (!canvas) return;
+      const card = canvas.closest('.signup-modal-card');
+      WPM = card.offsetWidth; HPM = card.offsetHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = WPM * dpr; canvas.height = HPM * dpr;
+      canvas.style.width = WPM + 'px'; canvas.style.height = HPM + 'px';
+      ctxPM = canvas.getContext('2d'); ctxPM.scale(dpr, dpr);
+      circlesPM = [];
+      for (let i = 0; i < 90; i++) circlesPM.push(mkPM());
+      afPM = requestAnimationFrame(tickPM);
+    }
+
+    function stopPM() { if (afPM) { cancelAnimationFrame(afPM); afPM = null; } }
+
+    function mkPM() {
+      const size = Math.random() * 1.2 + 0.4;
+      return { x: Math.random() * WPM, y: Math.random() * HPM, tx: 0, ty: 0, size, alpha: 0,
+        targetAlpha: parseFloat((Math.random() * 0.45 + 0.08).toFixed(2)),
+        dx: (Math.random() - 0.5) * 0.12, dy: (Math.random() - 0.5) * 0.12, mag: 0.1 + Math.random() * 3.5 };
+    }
+
+    function tickPM() {
+      ctxPM.clearRect(0, 0, WPM, HPM);
+      circlesPM.forEach((c, i) => {
+        const edge = Math.min(c.x + c.tx - c.size, WPM - c.x - c.tx - c.size, c.y + c.ty - c.size, HPM - c.y - c.ty - c.size);
+        const fade = Math.max(0, Math.min(1, edge / 20));
+        c.alpha = edge > 20 ? Math.min(c.alpha + 0.02, c.targetAlpha) : c.targetAlpha * fade;
+        c.x += c.dx; c.y += c.dy;
+        c.tx += (mPM.x / (50 / c.mag) - c.tx) / 22;
+        c.ty += (mPM.y / (50 / c.mag) - c.ty) / 22;
+        ctxPM.save(); ctxPM.translate(c.tx, c.ty);
+        ctxPM.beginPath(); ctxPM.arc(c.x, c.y, c.size, 0, Math.PI * 2);
+        ctxPM.fillStyle = `rgba(180,190,185,${c.alpha})`; ctxPM.fill(); ctxPM.restore();
+        if (c.x < -c.size || c.x > WPM + c.size || c.y < -c.size || c.y > HPM + c.size) circlesPM[i] = mkPM();
+      });
+      afPM = requestAnimationFrame(tickPM);
+    }
+
+    canvas.closest('.signup-modal-card').addEventListener('mousemove', e => {
+      const rect = canvas.getBoundingClientRect();
+      mPM.x = e.clientX - rect.left - WPM / 2;
+      mPM.y = e.clientY - rect.top  - HPM / 2;
+    });
+
+    document.getElementById('pricingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('[type="submit"]');
+      const data = collectFormData(this);
+      data.source = 'Pricing Page';
+      data.plan   = badge.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      fetch(SHEETS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(data)
+      })
+      .catch(() => {})
+      .finally(() => { window.location.href = stripeUrl; });
+    });
+  })();
+
   document.getElementById('signupForm').addEventListener('submit', function(e) {
     e.preventDefault();
     submitToSheets(this, this.querySelector('[type="submit"]'));
