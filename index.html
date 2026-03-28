@@ -3488,6 +3488,69 @@
     </div>
   </div>
 
+  <!-- ===== PRICING SIGNUP MODAL ===== -->
+  <div id="pricingModal" class="signup-modal" role="dialog" aria-modal="true" aria-labelledby="pricingModalTitle">
+    <div class="signup-modal-overlay" id="pricingModalOverlay"></div>
+    <div class="signup-modal-card">
+      <canvas id="pricingModalCanvas" class="signup-modal-particles"></canvas>
+      <div class="signup-modal-glow-tl"></div>
+      <div class="signup-modal-glow-br"></div>
+      <div class="signup-modal-inner">
+        <div class="signup-modal-header">
+          <img src="logov1.png" alt="Klutch" style="height:60px;">
+          <button class="signup-modal-close" id="pricingModalClose" aria-label="Close">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 3L3 11M3 3l8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div class="signup-modal-body">
+          <div class="signup-plan-badge" id="pricingModalBadge" style="background:rgba(30,231,119,0.1);color:var(--green);border-color:rgba(30,231,119,0.25);">Klutch</div>
+          <h2 class="signup-modal-title" id="pricingModalTitle">Let's get you set up.</h2>
+          <p class="signup-modal-subtitle">Fill in your info and we'll get you started right after.</p>
+          <form id="pricingForm" class="signup-form" novalidate>
+            <div class="signup-field-2col">
+              <div class="signup-field">
+                <label for="pm-name">Full Name</label>
+                <input type="text" id="pm-name" name="name" placeholder="Your name" required>
+              </div>
+              <div class="signup-field">
+                <label for="pm-email">Work Email</label>
+                <input type="email" id="pm-email" name="email" placeholder="you@dealership.com" required>
+              </div>
+            </div>
+            <div class="signup-field-2col">
+              <div class="signup-field">
+                <label for="pm-dealership">Dealership / Company</label>
+                <input type="text" id="pm-dealership" name="dealership" placeholder="e.g. Metro Ford">
+              </div>
+              <div class="signup-field">
+                <label for="pm-phone">Phone Number</label>
+                <input type="tel" id="pm-phone" name="phone" placeholder="(555) 000-0000" required>
+              </div>
+            </div>
+            <div class="signup-field">
+              <label for="pm-role">Your Role</label>
+              <select id="pm-role" name="role">
+                <option value="">Select...</option>
+                <option>Sales Rep</option>
+                <option>Sales Manager</option>
+                <option>Dealer Principal</option>
+                <option>BDC / Internet Manager</option>
+                <option>Independent Dealer</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="signup-divider"></div>
+            <button type="submit" class="signup-submit btn-primary btn-primary-lg">
+              Next
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style="flex-shrink:0;"><path d="M2 6.5h9M6.5 2l4.5 4.5-4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
+          <p class="signup-terms">You'll be taken to our secure checkout on the next step.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== SCHEDULE DEMO MODAL ===== -->
   <div id="scheduleModal" class="signup-modal" role="dialog" aria-modal="true" aria-labelledby="scheduleModalTitle">
     <div class="signup-modal-overlay" id="scheduleModalOverlay"></div>
